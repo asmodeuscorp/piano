@@ -1,46 +1,493 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piano - Academia Musical</title>
+    <title>Maestro Fernando Muñoz | Clases y Eventos</title>
+    <meta name="description" content="Clases de piano y guitarra con el Maestro Fernando Muñoz, y música en vivo para eventos con piano y violín (Dueto con Alondra Muñoz) en Querétaro.">
+    
+    <!-- Tailwind CSS (Estilos modernos) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fuentes de Google: Cinzel (Títulos) y Raleway (Cuerpo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Raleway:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Raleway', 'sans-serif'], 
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        // Nueva Paleta: Esmeralda y Cobre
+                        emerald: {
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22', // Fondo oscuro principal
+                        },
+                        copper: {
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c', // Color de acento principal
+                            700: '#c2410c',
+                        },
+                        cream: '#fffbeb', // Fondo claro cálido
+                    },
+                    keyframes: {
+                        keypress: {
+                            '0%, 100%': { transform: 'translateY(0)', backgroundColor: 'var(--bg-color)' },
+                            '50%': { transform: 'translateY(2px)', backgroundColor: '#ea580c' }, // Copper press
+                        }
+                    },
+                    animation: {
+                        keypress: 'keypress 0.3s ease-in-out',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+        .hero-bg {
+            background-image: linear-gradient(rgba(2, 44, 34, 0.7), rgba(2, 44, 34, 0.8)), url('https://images.unsplash.com/photo-1552422535-c45813c61732?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* Estilos del Piano Animado */
+        .piano-container {
             display: flex;
             justify-content: center;
-            align-items: center;
+            background: #022c22; /* Emerald 950 */
+            padding: 20px;
+            border-top: 4px solid #ea580c; /* Copper */
+            position: relative;
+            overflow: hidden;
         }
-        .container {
-            text-align: center;
-            color: white;
-            padding: 40px;
+        .key {
+            position: relative;
+            float: left;
+            transition: all 0.1s ease;
         }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .white-key {
+            width: 30px;
+            height: 100px;
+            background: #fffbeb; /* Creamy white */
+            border: 1px solid #a8a29e;
+            border-radius: 0 0 4px 4px;
+            z-index: 1;
         }
-        p {
-            font-size: 1.5em;
-            margin: 20px 0;
+        .white-key.active {
+            background: #fdba74 !important; /* Copper light */
+            transform: scale(0.98);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
         }
-        .piano-icon {
-            font-size: 5em;
-            margin: 30px 0;
+        .black-key {
+            width: 20px;
+            height: 60px;
+            background: #1c1917; /* Warm black */
+            position: absolute;
+            left: 20px; 
+            z-index: 2;
+            border-radius: 0 0 4px 4px;
+        }
+        .black-key.active {
+            background: #c2410c !important; /* Copper dark */
+            transform: scale(0.98);
+        }
+        @media (max-width: 640px) {
+            .white-key { width: 20px; height: 80px; }
+            .black-key { width: 14px; height: 50px; left: 13px; }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="piano-icon">🎹</div>
-        <h1>Bienvenido a Piano</h1>
-        <p>Academia de Música</p>
-        <p>Sitio web en construcción</p>
+<body class="bg-cream text-stone-800 antialiased pb-16 md:pb-0">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-cream/95 backdrop-blur-sm shadow-md transition-all duration-300 border-b border-stone-200" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i data-lucide="music" class="h-8 w-8 text-emerald-800"></i>
+                    <span class="font-serif font-bold text-xl md:text-2xl tracking-wide text-emerald-950">Maestro Fernando Muñoz</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-stone-600 hover:text-emerald-800 font-semibold transition tracking-wide text-sm uppercase">Inicio</a>
+                    <a href="#clases" class="text-stone-600 hover:text-emerald-800 font-semibold transition tracking-wide text-sm uppercase">Clases</a>
+                    <a href="#eventos" class="text-stone-600 hover:text-emerald-800 font-semibold transition tracking-wide text-sm uppercase">Eventos</a>
+                    <a href="#galeria" class="text-stone-600 hover:text-emerald-800 font-semibold transition tracking-wide text-sm uppercase">Galería</a>
+                    <a href="#contacto" class="bg-emerald-900 hover:bg-emerald-800 text-cream px-6 py-2 rounded-sm font-bold transition shadow-lg transform hover:scale-105 tracking-widest text-xs uppercase border border-emerald-800">
+                        Contacto
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-emerald-900 hover:text-emerald-700 focus:outline-none">
+                        <i data-lucide="menu" class="h-8 w-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-stone-200 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#inicio" class="block px-3 py-3 text-emerald-900 hover:bg-stone-100 font-serif font-bold text-lg mobile-link">INICIO</a>
+                <a href="#clases" class="block px-3 py-3 text-emerald-900 hover:bg-stone-100 font-serif font-bold text-lg mobile-link">CLASES</a>
+                <a href="#eventos" class="block px-3 py-3 text-emerald-900 hover:bg-stone-100 font-serif font-bold text-lg mobile-link">EVENTOS</a>
+                <a href="#contacto" class="block px-3 py-3 text-copper-700 font-bold text-lg mobile-link">CONTACTAR</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-bg h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div> <!-- Textura sutil -->
+        <div class="text-center px-4 max-w-5xl mx-auto relative z-10">
+            <div class="inline-block border-y-2 border-copper-500 py-2 px-6 mb-6 animate-fade-in-up">
+                <span class="block text-copper-400 text-lg md:text-xl font-sans font-semibold tracking-[0.2em] uppercase">Piano · Guitarra · Violín</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight text-shadow">
+                Música que Inspira <br/> <span class="text-emerald-200 italic font-normal">y Acompaña</span>
+            </h1>
+            <p class="text-lg md:text-xl text-stone-100 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+                Excelencia musical en Querétaro con el <strong class="text-white">Maestro Fernando Muñoz</strong>. Educación personalizada y amenización de eventos exclusivos.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#clases" class="bg-copper-600 text-white px-10 py-4 rounded-sm font-bold hover:bg-copper-700 transition shadow-xl w-full sm:w-auto text-center tracking-widest uppercase text-xs border border-copper-500">
+                    Ver Clases
+                </a>
+                <a href="#eventos" class="bg-emerald-900/80 backdrop-blur-sm border border-emerald-400/30 text-white px-10 py-4 rounded-sm font-bold hover:bg-emerald-800 transition w-full sm:w-auto text-center tracking-widest uppercase text-xs">
+                    Ver Eventos
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 animate-bounce text-copper-400/80">
+            <div class="h-12 w-0.5 bg-copper-400 mx-auto mb-2"></div>
+            <span class="text-xs tracking-widest uppercase">Descubre más</span>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section class="py-24 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-emerald-950 mb-6">Nuestros Servicios</h2>
+                <div class="flex justify-center items-center gap-4">
+                    <div class="h-px w-12 bg-copper-600"></div>
+                    <i data-lucide="music-2" class="h-6 w-6 text-copper-600"></i>
+                    <div class="h-px w-12 bg-copper-600"></div>
+                </div>
+                <p class="mt-6 text-stone-600 text-lg max-w-2xl mx-auto">La música es un lenguaje universal que enseñamos con paciencia y ejecutamos con pasión.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Tarjeta de Clases -->
+                <div id="clases" class="group relative">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-emerald-800 to-emerald-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-white border border-stone-200 shadow-xl rounded-sm overflow-hidden">
+                        <div class="h-80 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1552422535-c45813c61732?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Clases de Piano" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 filter sepia-[0.2]">
+                            <div class="absolute inset-0 bg-emerald-950/40 group-hover:bg-emerald-950/20 transition duration-500"></div>
+                            <div class="absolute top-6 right-6 bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+                                <i data-lucide="book-open" class="h-6 w-6 text-emerald-800"></i>
+                            </div>
+                        </div>
+                        <div class="p-10 text-center">
+                            <h3 class="text-3xl font-serif font-bold text-emerald-950 mb-2">Academia Musical</h3>
+                            <p class="text-copper-600 font-bold text-xs uppercase tracking-widest mb-6">Piano · Guitarra · Teoría</p>
+                            <p class="text-stone-600 mb-8 leading-relaxed">
+                                Un enfoque pedagógico adaptado a cada alumno. Desde los fundamentos técnicos hasta la interpretación expresiva, guiados por la experiencia del Maestro Fernando.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-8 text-left text-sm text-stone-700 bg-stone-50 p-4 rounded-sm border border-stone-100">
+                                <div class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-copper-600"></i> Niños y Adultos</div>
+                                <div class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-copper-600"></i> Solfeo incluido</div>
+                                <div class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-copper-600"></i> Presencial</div>
+                                <div class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-copper-600"></i> A Domicilio</div>
+                            </div>
+
+                            <a href="https://wa.me/524424610181?text=Hola,%20me%20interesa%20información%20sobre%20las%20clases%20de%20música" target="_blank" class="inline-block w-full py-4 border-2 border-emerald-900 text-emerald-900 font-bold hover:bg-emerald-900 hover:text-white transition tracking-widest uppercase text-xs rounded-sm">
+                                Agendar Entrevista
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Eventos -->
+                <div id="eventos" class="group relative">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-copper-600 to-orange-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-white border border-stone-200 shadow-xl rounded-sm overflow-hidden">
+                        <div class="h-80 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1465847899078-b14fe371b528?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Música para Eventos" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 filter sepia-[0.2]">
+                            <div class="absolute inset-0 bg-emerald-950/40 group-hover:bg-emerald-950/20 transition duration-500"></div>
+                            <div class="absolute top-6 right-6 bg-white/90 backdrop-blur p-3 rounded-full shadow-lg">
+                                <i data-lucide="music-4" class="h-6 w-6 text-copper-600"></i>
+                            </div>
+                        </div>
+                        <div class="p-10 text-center">
+                            <h3 class="text-3xl font-serif font-bold text-emerald-950 mb-2">Eventos Exclusivos</h3>
+                            <p class="text-copper-600 font-bold text-xs uppercase tracking-widest mb-6">Piano & Violín</p>
+                            <p class="text-stone-600 mb-8 leading-relaxed">
+                                La elegancia del dueto formado por padre e hija. El Maestro Fernando y la violinista <strong>Alondra Muñoz</strong> crean la atmósfera perfecta para bodas y recepciones.
+                            </p>
+                            
+                             <div class="grid grid-cols-2 gap-4 mb-8 text-left text-sm text-stone-700 bg-stone-50 p-4 rounded-sm border border-stone-100">
+                                <div class="flex items-center gap-2"><i data-lucide="star" class="h-4 w-4 text-copper-600"></i> Bodas Civiles</div>
+                                <div class="flex items-center gap-2"><i data-lucide="star" class="h-4 w-4 text-copper-600"></i> Cenas Formales</div>
+                                <div class="flex items-center gap-2"><i data-lucide="star" class="h-4 w-4 text-copper-600"></i> Cocteles</div>
+                                <div class="flex items-center gap-2"><i data-lucide="star" class="h-4 w-4 text-copper-600"></i> Música Sacra</div>
+                            </div>
+
+                            <a href="https://wa.me/524424610181?text=Hola,%20busco%20música%20para%20un%20evento%20el%20día..." target="_blank" class="inline-block w-full py-4 bg-emerald-900 text-white font-bold hover:bg-emerald-800 transition tracking-widest uppercase text-xs rounded-sm shadow-md">
+                                Solicitar Cotización
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Mí -->
+    <section class="py-24 bg-emerald-950 text-white relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <i data-lucide="music" class="absolute top-10 right-10 h-64 w-64 text-emerald-900/30 -rotate-12"></i>
+        
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-16 relative z-10">
+            <div class="md:w-5/12">
+                <div class="relative">
+                    <div class="absolute top-4 -left-4 w-full h-full border-2 border-copper-600 rounded-sm"></div>
+                    <img src="https://images.unsplash.com/photo-1549834125-90d981590e81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="José Fernando Muñoz Mendoza" class="relative z-10 shadow-2xl w-full object-cover h-[500px] grayscale hover:grayscale-0 transition duration-700 rounded-sm">
+                </div>
+            </div>
+            <div class="md:w-7/12">
+                <span class="text-copper-400 font-bold uppercase tracking-widest text-xs mb-2 block">Trayectoria y Familia</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-8 leading-tight">José Fernando Muñoz Mendoza</h2>
+                <div class="space-y-6 text-emerald-100 font-light text-lg leading-relaxed">
+                    <p>
+                        Conocido en el gremio como el <strong>"Maestro Fernando Muñoz"</strong>, he dedicado mi carrera a cultivar el talento musical en otros y a embellecer momentos irrepetibles.
+                    </p>
+                    <p>
+                        La música es un legado que comparto con mi hija, <strong>Alondra Muñoz</strong>. Juntos, fusionamos la profundidad armónica del piano con la dulzura melódica del violín, ofreciendo una experiencia auditiva que va más allá de lo convencional.
+                    </p>
+                </div>
+                <div class="mt-10 pt-8 border-t border-emerald-800 flex items-center gap-4">
+                    <div class="text-right">
+                        <p class="font-serif italic text-2xl text-copper-200">Fernando & Alondra</p>
+                        <p class="text-xs uppercase tracking-widest text-emerald-400 mt-1">Dueto Familiar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería / Multimedia -->
+    <section id="galeria" class="py-24 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-4">
+             <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold text-emerald-950 mb-4">Repertorio en Vivo</h2>
+                <p class="text-stone-600">Una muestra de nuestra interpretación.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Video Placeholder 1 -->
+                <div class="bg-white p-2 shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="aspect-w-16 aspect-h-9 h-56 bg-stone-200 flex items-center justify-center group cursor-pointer relative overflow-hidden">
+                         <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
+                        <i data-lucide="play" class="relative h-16 w-16 text-white border-2 border-white rounded-full p-4 group-hover:bg-white group-hover:text-emerald-900 transition duration-300"></i>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h4 class="font-serif font-bold text-emerald-900 text-lg">Solo de Piano</h4>
+                        <p class="text-xs text-stone-500 uppercase tracking-wide">Música Clásica</p>
+                    </div>
+                </div>
+                <!-- Video Placeholder 2 -->
+                <div class="bg-white p-2 shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="aspect-w-16 aspect-h-9 h-56 bg-stone-200 flex items-center justify-center group cursor-pointer relative overflow-hidden">
+                         <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
+                        <i data-lucide="play" class="relative h-16 w-16 text-white border-2 border-white rounded-full p-4 group-hover:bg-white group-hover:text-emerald-900 transition duration-300"></i>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h4 class="font-serif font-bold text-emerald-900 text-lg">Piano y Violín</h4>
+                        <p class="text-xs text-stone-500 uppercase tracking-wide">Canon en D - Pachelbel</p>
+                    </div>
+                </div>
+                <!-- Video Placeholder 3 -->
+                <div class="bg-white p-2 shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+                    <div class="aspect-w-16 aspect-h-9 h-56 bg-stone-200 flex items-center justify-center group cursor-pointer relative overflow-hidden">
+                         <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
+                        <i data-lucide="play" class="relative h-16 w-16 text-white border-2 border-white rounded-full p-4 group-hover:bg-white group-hover:text-emerald-900 transition duration-300"></i>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h4 class="font-serif font-bold text-emerald-900 text-lg">Clase Muestra</h4>
+                        <p class="text-xs text-stone-500 uppercase tracking-wide">Técnica Básica</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto / CTA Final -->
+    <section id="contacto" class="py-24 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-emerald-950 mb-8">Contacto</h2>
+            <p class="text-lg text-stone-600 mb-12 max-w-2xl mx-auto">
+                Para consultas sobre horarios de clases o disponibilidad para fechas de eventos, por favor contáctenos directamente.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <a href="tel:+524424610181" class="group bg-stone-50 hover:bg-emerald-50 p-8 border border-stone-200 hover:border-emerald-200 transition duration-300 rounded-sm text-center">
+                    <i data-lucide="phone" class="h-10 w-10 text-emerald-900 mx-auto mb-4 group-hover:scale-110 transition"></i>
+                    <h3 class="text-sm font-bold text-stone-500 uppercase tracking-widest mb-2">Llamada Telefónica</h3>
+                    <span class="text-2xl font-serif font-bold text-emerald-950">442 461 0181</span>
+                </a>
+
+                <a href="https://wa.me/524424610181" target="_blank" class="group bg-stone-50 hover:bg-emerald-50 p-8 border border-stone-200 hover:border-emerald-200 transition duration-300 rounded-sm text-center">
+                    <i data-lucide="message-circle" class="h-10 w-10 text-emerald-900 mx-auto mb-4 group-hover:scale-110 transition"></i>
+                    <h3 class="text-sm font-bold text-stone-500 uppercase tracking-widest mb-2">Mensaje de WhatsApp</h3>
+                    <span class="text-2xl font-serif font-bold text-emerald-950">Iniciar Chat</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Piano Animado (Para Elisa) -->
+    <div class="bg-emerald-950 text-center py-6 border-t border-emerald-900">
+        <p class="text-copper-500 font-serif italic mb-4 text-sm tracking-wide">Beethoven - Para Elisa</p>
+        <div class="piano-container shadow-inner" id="piano">
+            <!-- Teclas generadas por JS -->
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-emerald-400 py-10 border-t border-emerald-900">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-emerald-900 p-2 rounded-full">
+                    <i data-lucide="music" class="h-5 w-5 text-copper-500"></i>
+                </div>
+                <span class="font-serif font-bold text-lg text-white">Maestro Fernando Muñoz</span>
+            </div>
+            <p class="text-xs text-emerald-600 uppercase tracking-widest">© 2024 Querétaro, México.</p>
+        </div>
+    </footer>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/524424610181?text=Hola,%20vi%20su%20página%20web%20y%20me%20gustaría%20más%20información." 
+       target="_blank"
+       class="fixed bottom-8 right-8 bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 z-50 flex items-center justify-center">
+        <i data-lucide="message-circle" class="h-8 w-8"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Mobile Menu Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.replace('bg-cream/95', 'bg-cream');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.replace('bg-cream', 'bg-cream/95');
+            }
+        });
+
+        // --- Piano Animation Logic (Für Elise) ---
+        const pianoContainer = document.getElementById('piano');
+        const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const octaves = 2;
+        let keys = [];
+
+        // Build Piano
+        for (let i = 0; i < octaves; i++) {
+            notes.forEach(note => {
+                if (!note.includes('#')) {
+                    const key = document.createElement('div');
+                    key.className = 'white-key key';
+                    key.dataset.note = note + (i + 4); // C4, D4...
+                    pianoContainer.appendChild(key);
+                    keys.push(key);
+                    
+                    const noteIndex = notes.indexOf(note);
+                    if (noteIndex > 0 && notes[noteIndex - 1].includes('#')) {
+                        const blackKey = document.createElement('div');
+                        blackKey.className = 'black-key key';
+                        blackKey.dataset.note = notes[noteIndex - 1] + (i + 4);
+                        key.appendChild(blackKey);
+                        keys.push(blackKey);
+                    }
+                }
+            });
+        }
+
+        const songSequence = [
+            'E5', 'D#5', 'E5', 'D#5', 'E5', 'B4', 'D5', 'C5', 'A4', 
+            'rest', 'C4', 'E4', 'A4', 'B4', 
+            'rest', 'E4', 'G#4', 'B4', 'C5', 
+            'rest', 'E4', 'E5', 'D#5', 'E5', 'D#5', 'E5', 'B4', 'D5', 'C5', 'A4'
+        ];
+
+        let noteIndex = 0;
+
+        function playNextNote() {
+            document.querySelectorAll('.key').forEach(k => k.classList.remove('active'));
+
+            const note = songSequence[noteIndex];
+            
+            if (note !== 'rest') {
+                const allKeys = document.querySelectorAll('.key');
+                allKeys.forEach(k => {
+                    if(k.dataset.note === note) {
+                        k.classList.add('active');
+                    }
+                });
+            }
+
+            noteIndex = (noteIndex + 1) % songSequence.length;
+            
+            let delay = 300;
+            if (note === 'rest') delay = 400;
+            
+            setTimeout(playNextNote, delay);
+        }
+
+        window.addEventListener('load', () => {
+             setTimeout(playNextNote, 1000);
+        });
+
+    </script>
 </body>
 </html>
