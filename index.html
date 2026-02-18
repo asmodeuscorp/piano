@@ -1,7 +1,15 @@
 <!DOCTYPE html>
-<!-- Force Rebuild v3 -->
+<!-- Force Rebuild v5 - GTM + Masonry -->
 <html lang="es" class="scroll-smooth">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WK826GFX');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maestro Fernando Muñoz | Clases y Eventos</title>
@@ -54,8 +62,8 @@
 
         /* Hero Background */
         .hero-bg {
-            /* ACTUALIZADO A v=3 para forzar actualización */
-            background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.9)), url('portada.jpg?v=3');
+            /* ACTUALIZADO A v=4 para forzar actualización */
+            background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.9)), url('portada.jpg?v=4');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -74,6 +82,10 @@
     </style>
 </head>
 <body class="bg-luxury-black text-luxury-cream antialiased overflow-x-hidden selection:bg-luxury-gold selection:text-black">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK826GFX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- Navegación -->
     <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
@@ -95,7 +107,7 @@
                     <a href="#inicio" class="text-xs font-semibold uppercase tracking-widest hover:text-luxury-gold transition-colors duration-300">Inicio</a>
                     <a href="#clases" class="text-xs font-semibold uppercase tracking-widest hover:text-luxury-gold transition-colors duration-300">Clases</a>
                     <a href="#eventos" class="text-xs font-semibold uppercase tracking-widest hover:text-luxury-gold transition-colors duration-300">Eventos</a>
-                    <a href="#galeria" class="text-xs font-semibold uppercase tracking-widest hover:text-luxury-gold transition-colors duration-300">Galería</a>
+                    <a href="#fotos" class="text-xs font-semibold uppercase tracking-widest hover:text-luxury-gold transition-colors duration-300">Galería</a>
                     <a href="#contacto" class="bg-luxury-gold text-black px-6 py-2 hover:bg-white transition-all duration-300 text-xs font-bold uppercase tracking-widest rounded-sm">
                         Contacto
                     </a>
@@ -116,6 +128,7 @@
                 <a href="#inicio" class="text-white hover:text-luxury-gold font-serif text-3xl mobile-link">Inicio</a>
                 <a href="#clases" class="text-white hover:text-luxury-gold font-serif text-3xl mobile-link">Clases</a>
                 <a href="#eventos" class="text-white hover:text-luxury-gold font-serif text-3xl mobile-link">Eventos</a>
+                <a href="#fotos" class="text-white hover:text-luxury-gold font-serif text-3xl mobile-link">Galería</a>
                 <a href="#contacto" class="text-black bg-luxury-gold font-bold text-sm uppercase tracking-widest mobile-link mt-4 px-8 py-3 rounded-sm">Contactar</a>
             </div>
         </div>
@@ -220,8 +233,8 @@
                 <!-- Imagen -->
                 <div class="lg:w-1/2 relative reveal order-2 lg:order-1">
                     <div class="relative z-10">
-                        <!-- ACTUALIZADO A v=3 -->
-                        <img src="mtrofernando.jpg?v=3" alt="José Fernando Muñoz Mendoza" class="w-full grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl">
+                        <!-- ACTUALIZADO A v=4 -->
+                        <img src="mtrofernando.jpg?v=4" alt="José Fernando Muñoz Mendoza" class="w-full grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl">
                     </div>
                     <!-- Marco decorativo sólido -->
                     <div class="absolute -bottom-6 -left-6 w-full h-full border-2 border-luxury-gold z-0 hidden md:block"></div>
@@ -257,13 +270,72 @@
         </div>
     </section>
 
-    <!-- Galería Minimalista -->
-    <section id="galeria" class="py-32 bg-white text-luxury-black">
+    <!-- NUEVA SECCIÓN: Galería de Fotos (Masonry) -->
+    <section id="fotos" class="py-24 bg-white text-luxury-black">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-luxury-gold text-xs font-bold uppercase tracking-widest-xl mb-4 block">Galería</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-luxury-black mb-6">Nuestras Presentaciones</h2>
+                <p class="text-gray-500 font-light max-w-2xl mx-auto">Capturando la elegancia y emoción de cada evento junto a Alondra.</p>
+                <div class="w-24 h-px bg-luxury-gold mx-auto mt-8"></div>
+            </div>
+
+            <!-- Grid Masonry (Mosaico elegante) -->
+            <!-- Importante: Usa nombres foto1.jpg hasta foto8.jpg -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 reveal">
+                
+                <!-- Foto 1 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto1.jpg?v=4" alt="Presentación Musical" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto2.jpg?v=4" alt="Evento en Vivo" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                </div>
+
+                <!-- Foto 3 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto3.jpg?v=4" alt="Concierto" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                </div>
+
+                <!-- Foto 4 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto4.jpg?v=4" alt="Piano y Violín" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                </div>
+
+                <!-- Foto 5 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto5.jpg?v=4" alt="Maestro Fernando" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                </div>
+
+                <!-- Foto 6 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto6.jpg?v=4" alt="Alondra Violín" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                </div>
+
+                <!-- Foto 7 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto7.jpg?v=4" alt="Evento Social" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                </div>
+
+                <!-- Foto 8 -->
+                <div class="relative group overflow-hidden rounded-sm break-inside-avoid shadow-lg cursor-pointer">
+                    <img src="./foto8.jpg?v=4" alt="Música en Vivo" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería Video -->
+    <section id="galeria" class="py-24 bg-luxury-cream text-luxury-black border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
                 <div>
-                    <span class="text-luxury-gold text-xs font-bold uppercase tracking-widest-xl mb-4 block">Portafolio</span>
-                    <h2 class="text-5xl md:text-6xl font-serif text-luxury-black">Repertorio en Vivo</h2>
+                    <span class="text-luxury-gold text-xs font-bold uppercase tracking-widest-xl mb-4 block">Experiencia</span>
+                    <h2 class="text-5xl md:text-6xl font-serif text-luxury-black">Video en Vivo</h2>
                 </div>
                 <div class="hidden md:block w-32 h-1 bg-luxury-black"></div>
             </div>
@@ -272,8 +344,8 @@
             <div class="flex justify-center reveal">
                  <div class="w-full max-w-sm bg-black rounded-sm shadow-2xl overflow-hidden border-2 border-luxury-black">
                     <video controls class="w-full h-auto aspect-[9/16] object-cover">
-                        <!-- ACTUALIZADO A v=3 -->
-                        <source src="dueto.mp4?v=3" type="video/mp4">
+                        <!-- ACTUALIZADO A v=4 -->
+                        <source src="dueto.mp4?v=4" type="video/mp4">
                         Tu navegador no soporta la reproducción de video.
                     </video>
                  </div>
