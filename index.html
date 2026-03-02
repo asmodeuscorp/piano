@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maestro Fernando Muñoz | Clases y Eventos</title>
+    <title>Maestro Fernando Muñoz | Clases y Eventos</title>    <!-- Google Analytics 4 - Piano -->    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGQ2WCMVFQ"></script>    <script>      window.dataLayer = window.dataLayer || [];      function gtag(){dataLayer.push(arguments);}      gtag('js', new Date());      gtag('config', 'G-RGQ2WCMVFQ');    </script>    <!-- Google Analytics 4 - Piano -->    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGQ2WCMVFQ"></script>    <script>      window.dataLayer = window.dataLayer || [];      function gtag(){dataLayer.push(arguments);}      gtag('js', new Date());      gtag('config', 'G-RGQ2WCMVFQ');    </script>     <!-- Google Analytics 4 - Piano -->     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGQ2WCMVFQ"></script>     <script>       window.dataLayer = window.dataLayer || [];       function gtag(){dataLayer.push(arguments);}       gtag('js', new Date());       gtag('config', 'G-RGQ2WCMVFQ');     </script>     <!-- Google Analytics 4 - Piano -->     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGQ2WCMVFQ"></script>     <script>       window.dataLayer = window.dataLayer || [];       function gtag(){dataLayer.push(arguments);}       gtag('js', new Date());       gtag('config', 'G-RGQ2WCMVFQ');     </script>
     <meta name="description" content="Clases de piano y guitarra con el Maestro Fernando Muñoz, y música en vivo para eventos con piano y violín (Dueto con Alondra Muñoz) en Querétaro.">
     
     <!-- Tailwind CSS -->
@@ -199,7 +199,7 @@
                     <p class="text-gray-600 mb-8 font-light leading-relaxed">
                         Piano, Guitarra y Teoría Musical. Un método personalizado para niños y adultos que desean dominar el instrumento con técnica y expresión.
                     </p>
-                    <a href="https://wa.me/524424610181?text=Hola,%20informes%20desde%20pagina%20sobre%20clases" target="_blank" class="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest hover:text-luxury-gold transition border-b-2 border-black hover:border-luxury-gold pb-1">
+                    <a href="https://wa.me/524424610181?text=Hola,%20informes%20desde%20pagina%20sobre%20clases" id="btn-whatsapp-clases" target="_blank" class="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest hover:text-luxury-gold transition border-b-2 border-black hover:border-luxury-gold pb-1">
                         Agendar Clase <i data-lucide="arrow-right" class="h-4 w-4"></i>
                     </a>
                 </div>
@@ -215,7 +215,7 @@
                     <p class="text-gray-600 mb-8 font-light leading-relaxed">
                         Dueto exclusivo padre e hija. Fernando y <strong>Alondra Muñoz</strong> crean la atmósfera perfecta para bodas, recepciones y eventos corporativos.
                     </p>
-                    <a href="https://wa.me/524424610181?text=Hola,%20informes%20desde%20pagina%20sobre%20eventos" target="_blank" class="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest hover:text-luxury-gold transition border-b-2 border-black hover:border-luxury-gold pb-1">
+                    <a href="https://wa.me/524424610181?text=Hola,%20informes%20desde%20pagina%20sobre%20eventos" id="btn-whatsapp-eventos" target="_blank" class="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest hover:text-luxury-gold transition border-b-2 border-black hover:border-luxury-gold pb-1">
                         Cotizar Evento <i data-lucide="arrow-right" class="h-4 w-4"></i>
                     </a>
                 </div>
@@ -368,11 +368,11 @@
             </p>
             
             <div class="flex flex-col md:flex-row justify-center gap-6">
-                <a href="https://wa.me/524424610181?text=Hola,%20informes%20desde%20pagina" target="_blank" class="flex items-center justify-center gap-3 bg-luxury-gold text-black px-12 py-5 hover:bg-white transition-colors min-w-[220px] rounded-sm">
+                <a href="https://wa.me/524424610181?text=Hola,%20informes%20desde%20pagina" id="btn-whatsapp-general" target="_blank" class="flex items-center justify-center gap-3 bg-luxury-gold text-black px-12 py-5 hover:bg-white transition-colors min-w-[220px] rounded-sm">
                     <i data-lucide="message-circle" class="h-4 w-4"></i>
                     <span class="font-bold text-xs uppercase tracking-widest">WhatsApp</span>
                 </a>
-                <a href="tel:+524424610181" class="flex items-center justify-center gap-3 border border-gray-700 px-12 py-5 hover:border-white transition-colors min-w-[220px] rounded-sm">
+                <a href="tel:+524424610181" id="btn-llamar" class="flex items-center justify-center gap-3 border border-gray-700 px-12 py-5 hover:border-white transition-colors min-w-[220px] rounded-sm">
                     <i data-lucide="phone" class="h-4 w-4"></i>
                     <span class="font-bold text-xs uppercase tracking-widest">442 461 0181</span>
                 </a>
@@ -394,7 +394,7 @@
     <!-- Scripts -->
     <script>
         // Inicializar Iconos
-        lucide.createIcons();
+        lucide.createIcons();  // ====================================================  // GOOGLE ANALYTICS 4 - PIANO - MAESTRO FERNANDO MUÑOZ  // 9 Medidores Adaptados  // ====================================================  // 1. CONVERSION: Clic en WhatsApp para Clases  document.addEventListener('DOMContentLoaded', function() {    var btnClases = document.getElementById('btn-whatsapp-clases');    if (btnClases) {      btnClases.addEventListener('click', function() {        gtag('event', 'whatsapp_clases', {          event_category: 'Conversion',          event_label: 'Agendar Clase - WhatsApp'        });      });    }    // 2. CONVERSION: Clic en WhatsApp para Eventos    var btnEventos = document.getElementById('btn-whatsapp-eventos');    if (btnEventos) {      btnEventos.addEventListener('click', function() {        gtag('event', 'whatsapp_eventos', {          event_category: 'Conversion',          event_label: 'Cotizar Evento - WhatsApp'        });      });    }    // 3. CONVERSION: Clic en WhatsApp general    var btnWA = document.getElementById('btn-whatsapp-general');    if (btnWA) {      btnWA.addEventListener('click', function() {        gtag('event', 'whatsapp_contacto', {          event_category: 'Conversion',          event_label: 'Contacto General - WhatsApp'        });      });    }    // 4. CLICK-TO-CALL: Clic en numero de telefono    var btnLlamar = document.getElementById('btn-llamar');    if (btnLlamar) {      btnLlamar.addEventListener('click', function() {        gtag('event', 'click_to_call', {          event_category: 'Conversion',          event_label: 'Llamada - 442 461 0181'        });      });    }    // 5. BOUNCE RATE: Si se va en menos de 10 segundos    var tiempoInicio = Date.now();    window.addEventListener('beforeunload', function() {      var segundos = Math.round((Date.now() - tiempoInicio) / 1000);      if (segundos < 10) {        gtag('event', 'bounce_rapido', {          event_category: 'Comportamiento',          event_label: 'Salida en menos de 10 segundos',          value: segundos        });      }    });    // 6. TIEMPO ACTIVO: Usuario activo mas de 10 segundos    setTimeout(function() {      gtag('event', 'engagement_10s', {        event_category: 'Comportamiento',        event_label: 'Usuario activo mas de 10 segundos - Piano'      });    }, 10000);    // 7. SCROLL DEPTH: Que tanto bajan en la pagina    var scrollMarcas = { 25: false, 50: false, 75: false, 100: false };    window.addEventListener('scroll', function() {      var scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);      [25, 50, 75, 100].forEach(function(marca) {        if (scrollPct >= marca && !scrollMarcas[marca]) {          scrollMarcas[marca] = true;          gtag('event', 'scroll_depth', {            event_category: 'Scroll',            event_label: marca + '% de la pagina - Piano'          });        }      });    });    // 8. FUENTE DE TRAFICO: De donde vienen    var urlParams = new URLSearchParams(window.location.search);    var src = urlParams.get('utm_source') || document.referrer || 'directo';    var med = urlParams.get('utm_medium') || 'ninguno';    gtag('event', 'fuente_trafico', {      event_category: 'Trafico',      event_label: src + ' / ' + med    });    // 9. GEOLOCALIZACION: Verifica si es de Queretaro    if (navigator.geolocation) {      navigator.geolocation.getCurrentPosition(function(pos) {        var lat = pos.coords.latitude;        var lon = pos.coords.longitude;        var esQueretaro = (lat > 20.4 && lat < 20.8 && lon > -100.6 && lon < -100.2);        gtag('event', 'geolocalizacion', {          event_category: 'Trafico',          event_label: esQueretaro ? 'Queretaro' : 'Fuera de Queretaro'        });      });    }  });
 
         // Mobile Menu
         const btn = document.getElementById('mobile-menu-btn');
@@ -441,3 +441,4 @@
     </script>
 </body>
 </html>
+
